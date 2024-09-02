@@ -67,3 +67,10 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
     totalPages,
   ];
 };
+
+export const getQueryFromSearchParam = (querySearchParam: string | string[] | undefined | null): string => {
+  return  Array.isArray(querySearchParam) ? querySearchParam[0] ?? '' : querySearchParam ?? '';
+}
+export const getPageFromSearchParam = (pageSearchParam: string | string[] | undefined | null): string => {
+  return  Array.isArray(pageSearchParam) ? pageSearchParam[0] ?? '1' : pageSearchParam ?? '1';
+}
