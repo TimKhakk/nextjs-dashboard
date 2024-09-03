@@ -1,3 +1,5 @@
+import currency from 'currency.js';
+import dayjs from 'dayjs';
 import { Revenue } from './definitions';
 
 export const formatCurrency = (amount: number) => {
@@ -74,3 +76,13 @@ export const getQueryFromSearchParam = (querySearchParam: string | string[] | un
 export const getPageFromSearchParam = (pageSearchParam: string | string[] | undefined | null): string => {
   return  Array.isArray(pageSearchParam) ? pageSearchParam[0] ?? '1' : pageSearchParam ?? '1';
 }
+
+export const convertDollarsToCents = (amount: number): number => currency(amount).multiply(100).value
+
+export const convertCentsToDollars = (amount: number): number => currency(amount).divide(100).value
+
+export const formatDate = (date: Date): string => dayjs(date).format("YYYY-MM-DD")
+
+export const databaseErrorMessageGenerator = ({ type }: { type: 'Create' | 'Update' | 'Delete' }) => ({
+  message: `Database Error: Failed to ${type} Invoice.`,
+})

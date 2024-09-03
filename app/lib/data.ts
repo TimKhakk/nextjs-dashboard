@@ -7,7 +7,7 @@ import {
   LatestInvoiceRaw,
   Revenue,
 } from './definitions';
-import { formatCurrency } from './utils';
+import { convertCentsToDollars, convertDollarsToCents, formatCurrency } from './utils';
 
 export async function fetchRevenue() {
   try {
@@ -156,7 +156,7 @@ export async function fetchInvoiceById(id: string) {
     const invoice = data.rows.map((invoice) => ({
       ...invoice,
       // Convert amount from cents to dollars
-      amount: invoice.amount / 100,
+      amount: convertCentsToDollars(invoice.amount),
     }));
 
     return invoice[0];

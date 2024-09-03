@@ -4,7 +4,7 @@ import { PAGE_PARAM_KEY, QUERY_PARAM_KEY } from "@/app/lib/config";
 import { useDebouncedCallback } from "@/app/lib/hooks";
 import { getQueryFromSearchParam } from "@/app/lib/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ChangeEventHandler, InputHTMLAttributes } from "react";
+import { ChangeEventHandler, InputHTMLAttributes, useEffect } from "react";
 
 export const usePageUrl = () => {
   const pathname = usePathname();
@@ -60,4 +60,10 @@ export const useClientSearchParams = () => {
     query,
     page,
   }
+}
+
+export const useLogErrorEffect = (error: Error) => {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
 }
